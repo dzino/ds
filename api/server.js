@@ -5,15 +5,15 @@ const cors = require("cors")
 const MongoClient = require("mongodb").MongoClient
 
 // константы
-const MONGO_ROOT_USERNAME = process.env.MONGO_ROOT_USERNAME
-const MONGO_ROOT_PASSWORD = process.env.MONGO_ROOT_PASSWORD
-const port = 8080
+const MONGO_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME
+const MONGO_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD
+const port = 3001
 const host = "0.0.0.0"
 
 // приложение
 const app = express()
 const jsonParser = express.json()
-app.use(cors())
+// app.use(cors())
 
 // mongodb
 const mongoClient = new MongoClient(

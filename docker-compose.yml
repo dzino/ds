@@ -1,4 +1,9 @@
-version: "3"
+version: "3.8"
+
+x-common-variables: &common-variables
+  MONGO_INITDB_ROOT_USERNAME: root
+  MONGO_INITDB_ROOT_PASSWORD: example
+
 services:
   client:
     image: payment-client
@@ -7,10 +12,6 @@ services:
     build: ./client
     volumes:
       - ./client/:/usr/src/app
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
   api:
     image: payment-api
     container_name: payment-api
@@ -18,15 +19,10 @@ services:
     build: ./api
     volumes:
       - ./api/:/usr/src/app
-    ports:
-      - "8080:8080"
     depends_on:
       - db
-    networks:
-      - app-network
     environment:
-      MONGO_ROOT_USERNAME: root
-      MONGO_ROOT_PASSWORD: example
+      <<: *common-variables
   db:
     image: mongo
     container_name: payment-db
@@ -34,17 +30,18 @@ services:
     volumes:
       - data-volume:/data/db
       - data-config:/data/configdb
-    ports:
-      - "27017:27017"
-    networks:
-      - app-network
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-
-networks:
-  app-network:
-    driver: bridge
+      <<: *common-variables
+  nginx:
+    image: payment-nginx
+    container_name: payment-nginx
+    depends_on:
+      - api
+      - client
+    restart: always
+    build: ./nginx
+    ports:
+      - "3000:80"
 
 volumes:
   data-volume:

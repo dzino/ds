@@ -31,13 +31,13 @@ function App() {
 function useAPI() {
   return () => {
     axios
-      // .post("http://127.0.0.1:8080/api/payments", {
+      // .post("/api/payments", {
       //   CardNumber: "0000000000000000",
       //   ExpDate: "04/2022",
       //   Cvv: "123",
       //   Amount: 100,
       // })
-      .get("http://127.0.0.1:8080/api/payments")
+      .get("/api/payments")
       .then(function (response) {
         console.log(response.data)
       })

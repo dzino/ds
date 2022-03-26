@@ -1,4 +1,4 @@
-URL=http://localhost:8080/api/payments
+URL=http://localhost:3000/api/payments
 JSON={"CardNumber": "0000000000000000", "ExpDate": "04/2022", "Cvv": "123", "Amount": 100}
 
 01_build:
