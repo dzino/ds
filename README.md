@@ -40,6 +40,12 @@ curl http://localhost:3000/api/payments
 - ExpessJS
 - MongoDB
 
+```txt
+data-volume ▬ ────  db ▲ ─┐                  ▬ ─ Volume
+        api ▄ ────    api ▲ ──┐              ▄ ─ Бандл
+     client ▄ ──── client ▲ ──┴── nginx ▲    ▲ ─ Контейнер
+```
+
 ## Задачи
 
 - [ ] Приложение должно выводить _форму с полями_:
