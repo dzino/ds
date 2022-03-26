@@ -1,0 +1,51 @@
+version: "3"
+services:
+  client:
+    image: payment-client
+    container_name: payment-client
+    restart: always
+    build: ./client
+    volumes:
+      - ./client/:/usr/src/app
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+  api:
+    image: payment-api
+    container_name: payment-api
+    restart: always
+    build: ./api
+    volumes:
+      - ./api/:/usr/src/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - app-network
+    environment:
+      MONGO_ROOT_USERNAME: root
+      MONGO_ROOT_PASSWORD: example
+  db:
+    image: mongo
+    container_name: payment-db
+    restart: always
+    volumes:
+      - data-volume:/data/db
+      - data-config:/data/configdb
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  data-volume:
+  data-config:
