@@ -47,6 +47,7 @@ app.post("/api/payments", jsonParser, function (req, res) {
 
   req.app.locals.collection.insertOne(user, function (err, result) {
     if (err) return console.log(err)
-    res.send(result)
+
+    res.send({ RequestId: result.insertedId, Amount: user.Amount })
   })
 })
