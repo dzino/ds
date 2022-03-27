@@ -39,11 +39,7 @@ curl http://localhost:3000/api/payments
 
 ## Стек
 
-- ReactJS
-- MUI
-- NodeJS
-- ExpessJS
-- MongoDB
+ReactJS // MUI // NodeJS // ExpessJS // MongoDB // Docker // Nginx
 
 ```txt
 СТРУКТУРА DOCKER:
